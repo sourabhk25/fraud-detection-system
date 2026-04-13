@@ -55,7 +55,7 @@ class PaymentControllerTest {
                 .amount(new BigDecimal("500.00"))
                 .currency("USD")
                 .status(PaymentStatus.PENDING)
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().toString())
                 .message("Payment initiated and sent for fraud analysis")
                 .build();
     }
@@ -101,7 +101,8 @@ class PaymentControllerTest {
         mockMvc.perform(get("/api/v1/payments/pay-001"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("pay-001"))
-                .andExpect(jsonPath("$.amount").value(500.00));
+                .andExpect(jsonPath("$.amount").value(500.00))
+                .andExpect(jsonPath("$.createdAt").isNotEmpty());
     }
 
     @Test

@@ -97,7 +97,8 @@ public class PaymentService {
                 .status(payment.getStatus())
                 .ipAddress(payment.getIpAddress())
                 .deviceId(payment.getDeviceId())
-                .createdAt(payment.getCreatedAt())
+                .createdAt(payment.getCreatedAt() != null ?
+                        payment.getCreatedAt().toString() : null)
                 .message(message)
                 .build();
     }

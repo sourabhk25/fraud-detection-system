@@ -3,7 +3,6 @@ package com.frauddetection.payment.dto;
 import com.frauddetection.payment.model.PaymentStatus;
 import lombok.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,6 +19,6 @@ public class PaymentResponseDTO {
     private PaymentStatus status;
     private String ipAddress;
     private String deviceId;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String message;
 }
