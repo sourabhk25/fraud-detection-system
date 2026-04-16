@@ -53,7 +53,18 @@ class FraudAnalyzer:
                 HumanMessage(content=user_prompt)
             ])
 
-            result = json.loads(response.content)
+            content = response.content.strip()
+            # Strip markdown code blocks if present
+            if content.startswith("```"):
+                content = content.split("```")[1]
+                if content.startswith("json"):
+                    content = content[4:]
+            content = content.strip()
+
+            if not content:
+                raise ValueError("Empty response from LLM")
+
+            result = json.loads(content)
             logger.info(f"Analysis complete for payment: {request.payment_id} "
                         f"| decision: {result.get('decision')}")
 
